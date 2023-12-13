@@ -5,14 +5,28 @@ import compresion from "compression";
 import cors from "cors";
 import dotenv from "dotenv";
 import "reflect-metadata";
+import { v2 as cloudinary } from "cloudinary";
 
 import userRoutes from "./routes/user-routes";
-
 import { AppDataSource } from "./db/data-source";
 
 dotenv.config();
+cloudinary.config({
+  cloud_name: "duo2x8exf",
+  api_key: "435133782825999",
+  api_secret: "SZkcvsn0WHFeCpV5RKbqqJQOsIY",
+});
 
 const app = express();
+
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from "typeorm";
+import { Test } from "./db/test-entity";
 
 app.use(
   cors({
@@ -31,6 +45,23 @@ AppDataSource.initialize()
   .catch((error: any) => console.log(error));
 
 app.use("/api/users", userRoutes);
+app.post("/test", async (req: any, res: any) => {
+  // console.log(cloudinary.);
+  // @ts-ignore
+  const yay = await cloudinary.uploader.upload(
+    "images\\hi2.jpg",
+    { public_id: "olympic_flag" },
+    function (error: any, result: any) {
+      return result;
+    }
+  );
+  res.send("success");
+  const test = AppDataSource.manager.create(Test, {
+    yay: yay.url,
+  });
+  const newTest = await AppDataSource.manager.save(test);
+  res.send(newTest);
+});
 
 const server = http.createServer(app);
 
