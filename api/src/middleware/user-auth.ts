@@ -35,16 +35,13 @@ export const auth = async (req: any, res: any, next: any) => {
   }
 
   jwt.verify(token, process.env.secretKey, async (err: any, data: any) => {
+    req.user = data;
     if (err) {
       return res.json({ status: false });
     } else {
-      const user = await AppDataSource.manager.findOneBy(User, {
-        id: data.id,
-      });
       // console.log(user);
-      if (user) {
-        req["user"] = user;
-      } else return res.json({ status: false });
+      // if (user) {
+      // } else return res.json({ status: false });
       // if (user) return res.json({ status: true, user: user.username });
       // else return res.json({ status: false });
     }

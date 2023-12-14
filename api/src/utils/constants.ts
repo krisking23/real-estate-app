@@ -1,4 +1,4 @@
 export enum ListingType {
-  SELL = "sell",
+  SELL = "sale",
   RENT = "rent",
 }

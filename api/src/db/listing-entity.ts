@@ -4,9 +4,11 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from "typeorm";
 
-import { ListingType } from "utils/constants";
+import { ListingType } from "../utils/constants";
+import { User } from "./user-entity";
 
 @Entity()
 export class Listing {
@@ -45,6 +47,9 @@ export class Listing {
 
   @Column()
   imageUrl: string;
+
+  @ManyToOne(() => User, (user: any) => user.listings)
+  user: User;
 
   // @Column("string", { array: true })
   // array: string[];
