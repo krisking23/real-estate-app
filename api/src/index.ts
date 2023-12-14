@@ -8,6 +8,7 @@ import "reflect-metadata";
 import { v2 as cloudinary } from "cloudinary";
 
 import userRoutes from "./routes/user-routes";
+import listingRoutes from "./routes/listing-routes";
 import { AppDataSource } from "./db/data-source";
 
 dotenv.config();
@@ -44,6 +45,12 @@ AppDataSource.initialize()
   })
   .catch((error: any) => console.log(error));
 
+app.get("/", (req: any, res: any) => {
+  res.send("hi");
+  console.log(req.cookies);
+});
+
+app.use("/listing", listingRoutes);
 app.use("/api/users", userRoutes);
 app.post("/test", async (req: any, res: any) => {
   // console.log(cloudinary.);

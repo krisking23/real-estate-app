@@ -43,8 +43,11 @@ export class Listing {
   @Column()
   discountedPrice?: number;
 
-  @Column("string", { array: true })
-  array: string[];
+  @Column()
+  imageUrl: string;
+
+  // @Column("string", { array: true })
+  // array: string[];
 
   @CreateDateColumn()
   created_at: Date; // Creation date
