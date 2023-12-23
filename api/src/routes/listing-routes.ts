@@ -4,6 +4,7 @@ import { saveUser, auth } from "../middleware/user-auth";
 import { AppDataSource } from "../db/data-source";
 import { User } from "../db/user-entity";
 import { Listing } from "../db/listing-entity";
+import { getListings } from "../controllers/listing.controller";
 
 const router = express.Router();
 
@@ -25,5 +26,7 @@ router.post("/", auth, async (req: any, res: any) => {
   // console.log(user);
   res.send(newListing);
 });
+
+router.get("/", getListings);
 
 export default router;
