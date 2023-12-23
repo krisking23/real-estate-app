@@ -38,6 +38,34 @@ export default async function Home() {
           </div>
           <Listings data={data} />
         </div>
+
+        <div>
+          <div className="my-3">
+            <h2 className="text-2xl font-semibold text-slate-600">
+              Recent places for rent
+            </h2>
+            <Link href="/search">
+              <p className="text-sm text-blue-800 hover:underline">
+                Show more places for rent
+              </p>
+            </Link>
+          </div>
+          <Listings data={data} />
+        </div>
+
+        <div>
+          <div className="my-3">
+            <h2 className="text-2xl font-semibold text-slate-600">
+              Recent places for sale
+            </h2>
+            <Link href="/search">
+              <p className="text-sm text-blue-800 hover:underline">
+                Show more places for sale
+              </p>
+            </Link>
+          </div>
+          <Listings data={data} />
+        </div>
       </div>
     </main>
   );
